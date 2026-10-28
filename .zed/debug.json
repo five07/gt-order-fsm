@@ -1,0 +1,45 @@
+[
+  {
+    // Tests in the package of the file you have open
+    "adapter": "Delve",
+    "label": "Debug tests: current package",
+    "request": "launch",
+    "mode": "test",
+    "program": "$ZED_DIRNAME",
+    "args": ["-test.v"]
+  },
+  {
+    // Only the test function under the cursor
+    "adapter": "Delve",
+    "label": "Debug test: under cursor",
+    "request": "launch",
+    "mode": "test",
+    "program": "$ZED_DIRNAME",
+    "args": ["-test.v", "-test.run", "^$ZED_SYMBOL$"]
+  },
+  {
+    "adapter": "Delve",
+    "label": "Debug tests: internal/order",
+    "request": "launch",
+    "mode": "test",
+    "program": "$ZED_WORKTREE_ROOT/internal/order",
+    "args": ["-test.v"]
+  },
+  {
+    "adapter": "Delve",
+    "label": "Debug tests: internal/api",
+    "request": "launch",
+    "mode": "test",
+    "program": "$ZED_WORKTREE_ROOT/internal/api",
+    "args": ["-test.v"]
+  },
+  {
+    // The HTTP server; set breakpoints in handlers, then curl it
+    "adapter": "Delve",
+    "label": "Debug server",
+    "request": "launch",
+    "mode": "debug",
+    "program": "$ZED_WORKTREE_ROOT/cmd/service",
+    "env": { "ADDR": "127.0.0.1:8080" }
+  }
+]

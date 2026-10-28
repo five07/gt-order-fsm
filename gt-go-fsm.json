@@ -1,0 +1,169 @@
+{
+  "info": {
+    "name": "gt-go-fsm",
+    "description": null,
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Successful Order",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "auth": {
+          "type": "noauth"
+        },
+        "description": "",
+        "url": {
+          "raw": "{{HOST}}/orders",
+          "protocol": "",
+          "host": [
+            "{{HOST}}"
+          ],
+          "path": [
+            "orders"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"amount_cents\": 12345,\n  \"currency\": \"USD\",\n  \"card_number\": \"1111\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {},
+            "exec": [
+              "pm.variables.set('OrderID', pm.response.body.id);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Failed Order",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "auth": {
+          "type": "noauth"
+        },
+        "description": "",
+        "url": {
+          "raw": "{{HOST}}/orders",
+          "protocol": "",
+          "host": [
+            "{{HOST}}"
+          ],
+          "path": [
+            "orders"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"amount_cents\": 12345,\n  \"currency\": \"USD\",\n  \"card_number\": \"9997\"\n}\n\n// 9999 payment declined\n// 9998 cancelled\n// 9997 needs_attention",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {},
+            "exec": [
+              "pm.variables.set('OrderID', pm.response.body.id);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Advance Order",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "auth": {
+          "type": "noauth"
+        },
+        "description": "",
+        "url": {
+          "raw": "{{HOST}}/orders/{{OrderID}}/advance",
+          "protocol": "",
+          "host": [
+            "{{HOST}}"
+          ],
+          "path": [
+            "orders",
+            "{{OrderID}}",
+            "advance"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Get Order",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "auth": {
+          "type": "noauth"
+        },
+        "description": "",
+        "url": {
+          "raw": "{{HOST}}/orders/{{OrderID}}",
+          "protocol": "",
+          "host": [
+            "{{HOST}}"
+          ],
+          "path": [
+            "orders",
+            "{{OrderID}}"
+          ],
+          "query": [],
+          "variable": []
+        }
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "HOST",
+      "value": "",
+      "type": "default"
+    },
+    {
+      "key": "OrderID",
+      "value": "",
+      "type": "default"
+    }
+  ]
+}

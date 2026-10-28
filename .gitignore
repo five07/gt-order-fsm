@@ -1,0 +1,40 @@
+# Build output
+/service
+/bin/
+/dist/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test and coverage artifacts
+*.test
+*.out
+coverage.*
+*.coverprofile
+profile.cov
+
+# Delve debugger
+__debug_bin*
+
+# Go workspace (local only)
+go.work
+go.work.sum
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Editors: keep shared .zed/debug.json, ignore everything else
+.zed/*
+!.zed/debug.json
+.idea/
+.vscode/
+*.swp
+*~
+
+# OS
+.DS_Store
+Thumbs.db
