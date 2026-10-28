@@ -147,7 +147,7 @@ POST /orders
   "state": "initialized",
   "amount_cents": 12345,
   "currency": "USD",
-  "card_last4": "1111",
+  "card_last4": "4242",
   "created_at": "2026-10-28T12:18:36.906799Z",
   "updated_at": "2026-10-28T12:18:36.906799Z",
   "history": [
@@ -204,7 +204,7 @@ BASE=http://localhost:8080
 
 ID=$(curl -s -X POST $BASE/orders \
   -H 'Content-Type: application/json' \
-  -d '{"amount_cents": 12500, "currency": "USD", "card_number": "4242424242424242"}' | jq -r .id)
+  -d '{"amount_cents": 12500, "currency": "USD", "card_number": "4242"}' | jq -r .id)
 
 curl -s -X POST $BASE/orders/$ID/advance | jq .state   # "payment_authorized"
 curl -s -X POST $BASE/orders/$ID/advance | jq .state   # "complete"
@@ -335,4 +335,3 @@ Coverage is 99.5% of statements across `internal/` (measured with `-coverpkg`). 
 - **Alerting:** a metric and page on any entry into `needs_attention`, and on its age.
 - **Authorize vs. capture:** business rules may specify authorize first and capture after delivery.
 - **AuthZ,** and rate limiting.
-
